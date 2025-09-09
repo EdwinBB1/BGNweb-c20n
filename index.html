@@ -1,0 +1,326 @@
+
+<!-- PÁGINA WEB PARA NAHOMI -->
+<!-- @BGNweb -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feliz Cumpleaños 💜</title>
+  <style>
+   body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+      min-height: 100vh;
+
+      /* Fondo con imagen centrada y difuminada */
+      background: url('bts.png') no-repeat center center fixed;
+      background-size: 50%;
+  
+      /* Capa de degradado para que se vea más elegante y oscuro */
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* capa negra semi-transparente para defuminar */
+      backdrop-filter: blur(10px); /* difuminado */
+      z-index: 0;
+    }
+
+    #videoContainer {
+      display: none;
+      margin: 20px auto;
+      max-width: 700px;
+      position: relative;
+      z-index: 3; /* asegura que quede encima del blur */
+    }
+
+    #videoCumple {
+      filter: none;       /* evita heredar filtros */
+      backdrop-filter: none;
+    }
+
+    header {
+      padding: 50px 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #e75480;
+      text-shadow: 2px 2px 8px black;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    p {
+      max-width: 600px;
+      margin: 0 auto 20px;
+      font-size: 1.2rem;
+    }
+
+    /* Carrusel con fade */
+    .carousel {
+      position: relative;
+      width: 80%;
+      max-width: 700px;
+      margin: 40px auto;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+      z-index: 2;
+    }
+
+    .carousel img {
+      width: 32%;
+      margin: 0, auto;
+      border-radius: 20px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .carousel img.active {
+      opacity: 1;
+      position: relative;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(231, 84, 128, 0.8);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      transition: background 0.3s;
+      z-index: 3;
+    }
+
+    .carousel-btn:hover {
+      background: rgba(255, 111, 161, 1);
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    .btn {
+      display: inline-block;
+      margin: 30px auto 60px;
+      padding: 12px 25px;
+      background: #e75480;
+      border: none;
+      border-radius: 25px;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      transition: background 0.3s;
+      position: relative;
+      z-index: 2;
+    }
+
+    .btn:hover {
+      background: #ff6fa1;
+    }
+
+    /* Corazones flotando */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 24px;
+      color: #e75480;
+      animation: float 5s linear infinite;
+      z-index: 1;
+      opacity: 0.7;
+    }
+
+    .logo {
+      position: fixed;   /* Fijo en la pantalla */
+      top: 20px;         /* distancia desde la parte superior */
+      right: 20px;       /* distancia desde la derecha */
+      width: 166px;       /* ajusta el tamaño del logo */
+      height: auto;      /* mantiene la proporción */
+      z-index: 5;        /* para que quede encima de todo */
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      text-align: center;
+      padding: 15px 10px;
+      font-size: 0.9rem;
+      position: relative;
+      z-index: 2;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); opacity: 0.7; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+    }
+  
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      h1 { font-size: 2.5rem; }
+      p { font-size: 1.1rem; }
+      .carousel img { width: 100%; border-radius: 15px; }
+      .logo { width: 120px; top: 15px; right: 15px; }
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      p { font-size: 1rem; padding: 0 10px; }
+      .btn { font-size: 1rem; padding: 10px 20px; }
+      .carousel { width: 95%; max-width: 100%; border-radius: 15px; }
+      .carousel img { width: 100%; }
+      .logo { width: 100px; }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.6rem; }
+      p { font-size: 0.95rem; }
+      .btn { font-size: 0.9rem; padding: 8px 16px; margin: 15px auto; }
+      .carousel { margin: 20px auto; border-radius: 10px; }
+      .logo { width: 80px; top: 10px; right: 10px; }
+      footer { font-size: 0.8rem; padding: 10px 5px; }
+    }
+</style>
+</head>
+<body>
+
+  <img src="logo.png" alt="Logo" class="logo">
+
+  <header>
+    <h1> 🧁 Feliz Cumpleaños Naho 🧁</h1>
+    <p>
+      Este es un regalo especial hecho para ti, porque sé cuánto amas a BTS.  
+      Espero que tu día esté lleno de alegría y mucho amor, rodeada de tus seres queridos
+      y momentos bonitos. Gracias por brindarme tu amistad tan valiosa y saber que 
+      puedo contar contigo siempre; Feliz Cumpleaños!✨.
+    </p>
+  </header>
+
+  <!-- Galería carrusel con fade -->
+  <section class="carousel">
+    <button class="carousel-btn prev">&#10094;</button>
+    <img src="bts1c.jpg" alt="BTS 1" class="active">
+    <img src="bts2c.jpg" alt="BTS 2">
+    <img src="bts3c.jpg" alt="BTS 3">
+    <img src="bts4c.jpg" alt="BTS 4">
+    <img src="bts5c.jpg" alt="BTS 5">
+    <img src="bts6c.jpg" alt="BTS 6">
+    <img src="bts7c.jpg" alt="BTS 7">
+    <img src="bts8c.jpg" alt="BTS 8">
+    <button class="carousel-btn next">&#10095;</button>
+  </section>
+
+  <div style="margin: 30px auto 60px; display: flex; gap: 20px; justify-content: center;">
+    <button class="btn" onclick="mostrarAmor()">Toca Aquí 😇</button>
+    <button class="btn" onclick="mostrarVideo()">Puedes tocar aquí? 😁</button>
+  </div>
+
+  <!-- Contenedor oculto del video -->
+  <div id="videoContainer" style="display:none; margin: 20px auto; max-width: 700px;">
+    <video id="videoCumple" width="100%" controls>
+      <source src="video.mp4" type="video/mp4">
+      Tu navegador no soporta este video.
+    </video>
+</div>
+
+  <script>
+    // Confetti con emojis ✨
+    function mostrarAmor() {
+      for (let i = 0; i < 30; i++) {
+        let confetti = document.createElement("div");
+        confetti.innerHTML = "✨";
+        confetti.style.position = "fixed";
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.top = "-20px";
+        confetti.style.fontSize = Math.random() * 20 + 15 + "px";
+        confetti.style.animation = "fall 3s linear forwards";
+        document.body.appendChild(confetti);
+        setTimeout(() => { confetti.remove(); }, 3000);
+      }
+      alert(" ¡Eres una persona muy especial para mí, tqm! 🫂");
+    }
+
+    // Animación confetti
+    const style = document.createElement("style");
+    style.innerHTML = `
+      @keyframes fall {
+        to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Corazones flotando 
+    function crearCorazon() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "🫰🏻";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(crearCorazon, 1000);
+
+    // Carrusel con fade
+    const images = document.querySelectorAll('.carousel img');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    let index = 0;
+
+    function showImage(newIndex) {
+      images[index].classList.remove('active');
+      index = (newIndex + images.length) % images.length;
+      images[index].classList.add('active');
+    }
+
+    // Función para mostrar el video
+    function mostrarVideo() {
+      const contenedor = document.getElementById("videoContainer");
+      const video = document.getElementById("videoCumple");
+      contenedor.style.display = "block";
+      video.play();
+    }
+    
+    nextBtn.addEventListener('click', () => {
+      showImage(index + 1);
+    });
+
+    prevBtn.addEventListener('click', () => {
+      showImage(index - 1);
+    });
+  </script>
+
+  <footer>
+    <p>© 2025 Todos los derechos reservados | By BGNweb for Nahomi</p>
+  </footer>
+
+</body>
+</html>
